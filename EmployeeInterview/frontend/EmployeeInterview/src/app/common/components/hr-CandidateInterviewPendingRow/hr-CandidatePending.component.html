@@ -1,0 +1,27 @@
+<td>
+    {{ index + 1}}
+</td>
+<td class="fw-semibold text-primary">
+    {{ interview.candidateId }}
+</td>
+<td>
+    {{ interview.candidateName }}
+</td>
+<!-- <td>
+    {{interview.email}}
+</td> -->
+<td>
+    {{ interview.interviewTypeName}}
+</td>
+<td>
+    {{ interview.interviewerName }}
+</td>
+<td>
+    {{ interview.dateOfInterview }}
+</td>
+<td class="d-flex justify-content-center">
+    <button class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
+        (click)="openFile(interview.filepath)">
+        <i class="bi bi-file-earmark-text"></i> View
+    </button>
+</td>

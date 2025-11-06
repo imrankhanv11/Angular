@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 73px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table thead {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}

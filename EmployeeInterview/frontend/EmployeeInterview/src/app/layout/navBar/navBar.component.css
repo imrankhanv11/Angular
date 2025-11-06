@@ -1,0 +1,59 @@
+.navbar {
+    transition: all 0.3s ease-in-out;
+    padding: 0.8rem 1rem;
+    background-color: #1976d2 !important; /* Blue tone */
+}
+
+.navbar.scrolled {
+    background-color: rgba(25, 118, 210, 0.95) !important;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand span {
+    color: white !important; /* golden accent */
+}
+
+.nav-link {
+    color: #f0f0f0 !important;
+    font-weight: 500;
+    margin: 0 0.3rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover{
+    text-decoration: underline black;
+    text-underline-offset: 4px;
+    transition: linear 8ms;
+}
+
+.nav-link.active {
+    color: black !important;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.btn-outline-danger {
+    border-color: #121010 !important;
+    color: #fff !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: #d32f2f !important;
+    color: #121010 !important;
+}

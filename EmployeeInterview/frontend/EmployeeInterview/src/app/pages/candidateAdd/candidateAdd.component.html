@@ -1,0 +1,140 @@
+<div class="form-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Add Candidate</h2>
+
+            <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="name">Name <small class="text-danger">*</small></label>
+                    <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter name"
+                        [class.is-invalid]="(f['name'].touched || submitted) && f['name'].invalid" />
+                    @if ((f['name'].touched || submitted) && f['name'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['name'].errors?.['required']) { <span>Name is required</span> }
+                        @if (f['name'].errors?.['minlength']) { <span>Minimum 2 characters</span> }
+                        @if (f['name'].errors?.['maxlength']) { <span>Maximum 30 characters</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email <small class="text-danger">*</small></label>
+                    <input type="email" id="email" class="form-control" formControlName="email"
+                        placeholder="Enter email"
+                        [class.is-invalid]="(f['email'].touched || submitted) && f['email'].invalid" />
+                    @if ((f['email'].touched || submitted) && f['email'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['email'].errors?.['required']) { <span>Email is required</span> }
+                        @if (f['email'].errors?.['email']) { <span>Invalid email format</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Fresher Checkbox -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="isFresher" formControlName="isFresher"
+                        (change)="onFresherChange($event)">
+                    <label class="form-check-label" for="isFresher">I am a Fresher</label>
+                </div>
+
+                <!-- Current Employer -->
+                <div class="form-group">
+                    <label>Current Employer <small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" formControlName="currentEmployer"
+                        placeholder="Enter current employer"
+                        [class.is-invalid]="(f['currentEmployer'].touched || submitted) && f['currentEmployer'].invalid" />
+                    @if ((f['currentEmployer'].touched || submitted) && f['currentEmployer'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['currentEmployer'].errors?.['required']) { <span>Required</span> }
+                        @if (f['currentEmployer'].errors?.['maxlength']) { <span>Max 40 characters</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Current Designation -->
+                <div class="form-group">
+                    <label>Current Designation <small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" formControlName="currentDesignation"
+                        placeholder="Enter designation"
+                        [class.is-invalid]="(f['currentDesignation'].touched || submitted) && f['currentDesignation'].invalid" />
+                    @if ((f['currentDesignation'].touched || submitted) && f['currentDesignation'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['currentDesignation'].errors?.['required']) { <span>Required</span> }
+                        @if (f['currentDesignation'].errors?.['maxlength']) { <span>Max 40 characters</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Total Experience -->
+                <div class="form-group">
+                    <label>Total Experience (Years) <small class="text-danger">*</small></label>
+                    <input type="number" class="form-control" formControlName="TotalExperience"
+                        placeholder="Enter total experience"
+                        [class.is-invalid]="(f['TotalExperience'].touched || submitted) && f['TotalExperience'].invalid" />
+                    @if ((f['TotalExperience'].touched || submitted) && f['TotalExperience'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['TotalExperience'].errors?.['required']) { <span>Required</span> }
+                        @if (f['TotalExperience'].errors?.['nonNegative']) { <span>Cannot be negative</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Notice Period -->
+                <div class="form-group">
+                    <label>Notice Period (Days) <small class="text-danger">*</small></label>
+                    <input type="number" class="form-control" formControlName="noticePeriod"
+                        placeholder="Enter notice period"
+                        [class.is-invalid]="(f['noticePeriod'].touched || submitted) && f['noticePeriod'].invalid" />
+                    @if ((f['noticePeriod'].touched || submitted) && f['noticePeriod'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['noticePeriod'].errors?.['required']) { <span>Required</span> }
+                        @if (f['noticePeriod'].errors?.['nonNegative']) { <span>Cannot be negative</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Referred Period -->
+                <div class="form-group">
+                    <label>Referred By (Optional)</label>
+                    <select class="form-control" formControlName="referredBy"
+                        [class.is-invalid]="(f['referredBy'].touched || submitted) && f['referredBy'].invalid">
+                        <option value="">-- None --</option>
+                        @for (emp of employees; track emp.Id ?? $index) {
+                        <option [value]="emp.id">{{ emp.name }}</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Sources -->
+                <div class="form-group">
+                    <label>Source <span class="text-muted small">(Optional)</span></label>
+                    <input type="text" class="form-control" formControlName="sources" placeholder="Enter source"
+                        [class.is-invalid]="(f['sources'].touched || submitted) && f['sources'].invalid" />
+                    @if ((f['sources'].touched || submitted) && f['sources'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['sources'].errors?.['maxlength']) { <span>Max 20 characters</span> }
+                    </div>
+                    }
+                </div>
+
+                <!-- Resume Upload -->
+                <div class="form-group">
+                    <label>Resume <small class="text-danger">*</small></label>
+                    <input type="file" class="form-control" (change)="onFileChange($event)" accept=".pdf,.doc,.docx"
+                        [class.is-invalid]="submitted && !selectedFile" />
+                    @if (submitted && !selectedFile) {
+                    <div class="invalid-feedback">
+                        <span>Resume is required</span>
+                    </div>
+                    }
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-submit">Add Candidate</button>
+            </form>
+        </div>
+    </div>
+</div>

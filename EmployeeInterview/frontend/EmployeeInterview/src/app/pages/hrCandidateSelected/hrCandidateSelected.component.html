@@ -1,0 +1,21 @@
+<div class="container mt-4">
+    <div class="table-responsive shadow-sm rounded bg-white p-3">
+        <table class="table table-striped table-hover align-middle text-center mb-0">
+            <thead class="table-info">
+                <tr>
+                    <th scope="col">S. No.</th>
+                    <th scope="col">Candidate Id</th>
+                    <th scope="col">Candidate Name</th>
+                    <th scope="col">Interviewer Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Resume</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @for (item of SelectedCandidates; track item.id; let i = $index) {
+                <tr app-candidate-selected-row [interview]="item" [index]="i"></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

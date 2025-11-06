@@ -1,0 +1,470 @@
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center">Interview Assessment Form</h4>
+            <p class="mb-0 text-center small">Interview ID: {{ interviewId }}</p>
+        </div>
+
+        <div class="card-body p-4">
+            <!-- Rating Scale -->
+            <div class="alert alert-info mb-4">
+                <h6 class="mb-2">Rating Scale:</h6>
+                <div class="d-flex flex-wrap gap-3">
+                    @for (label of ratingLabels; track $index; let i = $index) {
+                    <span class="badge bg-secondary">{{ i + 1 }} - {{ label }}</span>
+                    }
+                </div>
+            </div>
+            <form [formGroup]="assessmentForm" (ngSubmit)="onSubmitForm()" novalidate>
+
+                <!-- Assessment Table -->
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th colspan="2" class="text-center">TECHNICAL and SOFT SKILLS LEVEL</th>
+                            </tr>
+                            <tr>
+                                <th class="w-50">Technical / Job Related</th>
+                                <th class="w-50">Soft Skills</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class=" d-flex w-100">
+                                        <!-- Technical Skills Column (left) - wrapped in technicalSkills form group -->
+                                        <div formGroupName="technicalSkills"
+                                            class="w-50 d-flex flex-column align-items-center">
+                                            <!-- Row 1: Concept -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Concept</label>
+                                    <select class="form-select form-select-sm" formControlName="concept"
+                                        [class.is-invalid]="technicalSkills['concept'].touched && technicalSkills['concept'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['concept'].touched &&
+                                    technicalSkills['concept'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <!-- Soft Skills will be in separate form group below -->
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 2: Technical -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Technical</label>
+                                    <select class="form-select form-select-sm" formControlName="technical"
+                                        [class.is-invalid]="technicalSkills['technical'].touched && technicalSkills['technical'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['technical'].touched &&
+                                    technicalSkills['technical'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 3: Domain -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Domain</label>
+                                    <select class="form-select form-select-sm" formControlName="domain"
+                                        [class.is-invalid]="technicalSkills['domain'].touched && technicalSkills['domain'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['domain'].touched && technicalSkills['domain'].invalid)
+                                    {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 4: Skill Set -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Skill Set</label>
+                                    <select class="form-select form-select-sm" formControlName="skillSet"
+                                        [class.is-invalid]="technicalSkills['skillSet'].touched && technicalSkills['skillSet'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['skillSet'].touched &&
+                                    technicalSkills['skillSet'].invalid)
+                                    {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 5: Analytical Skills -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Analytical Skills</label>
+                                    <select class="form-select form-select-sm" formControlName="analyticalSkills"
+                                        [class.is-invalid]="technicalSkills['analyticalSkills'].touched && technicalSkills['analyticalSkills'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['analyticalSkills'].touched &&
+                                    technicalSkills['analyticalSkills'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 6: Problem Solving -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Problem Solving</label>
+                                    <select class="form-select form-select-sm" formControlName="problemSolving"
+                                        [class.is-invalid]="technicalSkills['problemSolving'].touched && technicalSkills['problemSolving'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['problemSolving'].touched &&
+                                    technicalSkills['problemSolving'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 7: Focused & Alert -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Focused & Alert</label>
+                                    <select class="form-select form-select-sm" formControlName="focusedAlert"
+                                        [class.is-invalid]="technicalSkills['focusedAlert'].touched && technicalSkills['focusedAlert'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['focusedAlert'].touched &&
+                                    technicalSkills['focusedAlert'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <!-- Row 8: Others Technical -->
+                            <tr>
+                                <td>
+                                    <label class="form-label fw-semibold">Others</label>
+                                    <select class="form-select form-select-sm" formControlName="othersTechnical"
+                                        [class.is-invalid]="technicalSkills['othersTechnical'].touched && technicalSkills['othersTechnical'].invalid">
+                                        <option value="">Select Rating</option>
+                                        @for (rating of ratingOptions; track rating) {
+                                        <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                        </option>
+                                        }
+                                    </select>
+                                    @if (technicalSkills['othersTechnical'].touched &&
+                                    technicalSkills['othersTechnical'].invalid) {
+                                    <div class="text-danger small mt-1">Rating is required</div>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+                </div> <!-- Close technicalSkills formGroupName -->
+
+                <!-- Soft Skills Column (right) - wrapped in softSkills form group -->
+                <div formGroupName="softSkills" class="w-50 d-flex flex-column align-items-center">
+                    <!-- Row 1: Communication -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Communication</label>
+                            <select class="form-select form-select-sm" formControlName="communication"
+                                [class.is-invalid]="softSkills['communication'].touched && softSkills['communication'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['communication'].touched &&
+                            softSkills['communication'].invalid)
+                            {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 2: Aptitude -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Aptitude</label>
+                            <select class="form-select form-select-sm" formControlName="aptitude"
+                                [class.is-invalid]="softSkills['aptitude'].touched && softSkills['aptitude'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['aptitude'].touched && softSkills['aptitude'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 3: Leadership -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Leadership</label>
+                            <select class="form-select form-select-sm" formControlName="leadership"
+                                [class.is-invalid]="softSkills['leadership'].touched && softSkills['leadership'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['leadership'].touched && softSkills['leadership'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 4: Initiative -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Initiative</label>
+                            <select class="form-select form-select-sm" formControlName="initiative"
+                                [class.is-invalid]="softSkills['initiative'].touched && softSkills['initiative'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['initiative'].touched && softSkills['initiative'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 5: Willingness to Learn -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Willingness to Learn</label>
+                            <select class="form-select form-select-sm" formControlName="willingnessToLearn"
+                                [class.is-invalid]="softSkills['willingnessToLearn'].touched && softSkills['willingnessToLearn'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['willingnessToLearn'].touched &&
+                            softSkills['willingnessToLearn'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 6: Attitude -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Attitude</label>
+                            <select class="form-select form-select-sm" formControlName="attitude"
+                                [class.is-invalid]="softSkills['attitude'].touched && softSkills['attitude'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['attitude'].touched && softSkills['attitude'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 7: Listening Skills -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Listening Skills</label>
+                            <select class="form-select form-select-sm" formControlName="listeningSkills"
+                                [class.is-invalid]="softSkills['listeningSkills'].touched && softSkills['listeningSkills'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['listeningSkills'].touched &&
+                            softSkills['listeningSkills'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+
+                    <!-- Row 8: Others Soft -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label class="form-label fw-semibold">Others</label>
+                            <select class="form-select form-select-sm" formControlName="othersSoft"
+                                [class.is-invalid]="softSkills['othersSoft'].touched && softSkills['othersSoft'].invalid">
+                                <option value="">Select Rating</option>
+                                @for (rating of ratingOptions; track rating) {
+                                <option [value]="rating">{{ rating }} - {{ getRatingLabel(rating) }}
+                                </option>
+                                }
+                            </select>
+                            @if (softSkills['othersSoft'].touched && softSkills['othersSoft'].invalid) {
+                            <div class="text-danger small mt-1">Rating is required</div>
+                            }
+                        </td>
+                    </tr>
+                </div> <!-- Close softSkills formGroupName -->
+
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        <tfoot>
+            <!-- Overall Ratings Row -->
+            <tr class="table-active fw-bold">
+                <td>
+                    <div class="d-flex justify-content-center gap-2 align-items-center">
+                        <span>Overall Technical Rating:</span>
+                        <span class="badge bg-primary fs-6">{{ technicalOverall }}/40</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center gap-2 align-items-center">
+                        <span>Overall Soft Skills Rating:</span>
+                        <span class="badge bg-primary fs-6">{{ softSkillsOverall }}/40</span>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+        </table>
+    </div>
+
+    <!-- Additional Evaluation Fields -->
+    <div class="row mb-4">
+        <div class="col-12 mb-3">
+            <label for="comments" class="form-label fw-semibold">Overall Comments</label>
+            <textarea id="comments" class="form-control" rows="3" formControlName="comments"
+                placeholder="Enter overall comments about the candidate..."
+                [class.is-invalid]="f['comments'].touched && f['comments'].invalid">
+            </textarea>
+            @if (f['comments'].touched && f['comments'].invalid) {
+            <div class="text-danger small mt-1">
+                @if (f['comments'].errors?.['required']) {
+                <div>Comments are required.</div>
+                }
+                @if (f['comments'].errors?.['maxlength']) {
+                <div>Maximum 500 characters allowed.</div>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="pros" class="form-label fw-semibold">Strengths / Pros</label>
+            <textarea id="pros" class="form-control" rows="2" formControlName="pros"
+                placeholder="Enter candidate strengths..." [class.is-invalid]="f['pros'].touched && f['pros'].invalid">
+            </textarea>
+            @if (f['pros'].touched && f['pros'].invalid) {
+            <div class="text-danger small mt-1">
+                @if (f['pros'].errors?.['required']) {
+                <div>Pros are required.</div>
+                }
+                @if (f['pros'].errors?.['maxlength']) {
+                <div>Maximum 200 characters allowed.</div>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="cons" class="form-label fw-semibold">Weaknesses / Cons</label>
+            <textarea id="cons" class="form-control" rows="2" formControlName="cons"
+                placeholder="Enter candidate weaknesses..." [class.is-invalid]="f['cons'].touched && f['cons'].invalid">
+            </textarea>
+            @if (f['cons'].touched && f['cons'].invalid) {
+            <div class="text-danger small mt-1">
+                @if (f['cons'].errors?.['required']) {
+                <div>Cons are required.</div>
+                }
+                @if (f['cons'].errors?.['maxlength']) {
+                <div>Maximum 200 characters allowed.</div>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="statusId" class="form-label fw-semibold">Final Recommendation</label>
+            <select id="statusId" class="form-select" formControlName="statusId"
+                [class.is-invalid]="f['statusId'].touched && f['statusId'].invalid">
+                <option value="">-- Select Recommendation --</option>
+                <option value="3">Selected</option>
+                <option value="2">Rejected</option>
+            </select>
+            @if (f['statusId'].touched && f['statusId'].invalid) {
+            <div class="text-danger small mt-1">Final recommendation is required.</div>
+            }
+        </div>
+    </div>
+
+    <!-- Error Summary -->
+    @if (assessmentForm.invalid && assessmentForm.touched) {
+    <div class="alert alert-warning small">
+        <i class="bi bi-exclamation-triangle"></i>
+        Please fill all required fields correctly before submitting.
+    </div>
+    }
+
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg px-5" type="submit" [disabled]="assessmentForm.invalid">
+            Submit Assessment
+        </button>
+    </div>
+    </form>
+</div>
+</div>
+</div>
