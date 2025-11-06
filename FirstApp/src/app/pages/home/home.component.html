@@ -1,0 +1,15 @@
+<div class="container my-5">
+  <h3 class="text-center mb-4 fw-bold text-primary">Available Books</h3>
+
+  <div class="row g-4">
+    @for (book of books$ | async; track book.bookId) {
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <app-book-card
+          [book]="book"
+          (addToCart)="addToCart($event)"
+          (deleteOneCart)="deleteOneCart($event)">
+        </app-book-card>
+      </div>
+    }
+  </div>
+</div>
