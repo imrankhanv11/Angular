@@ -1,0 +1,74 @@
+.user-list-container {
+    padding: 25px;
+    background-color: #f9fbfc;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease-in-out;
+    overflow-x: auto;
+}
+
+.user-list-container:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.table-title {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+    color: #0d6efd;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px 18px;
+    border: 1px solid #e1e5eb;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.user-table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f8faff;
+}
+
+.user-table tr:hover {
+    background-color: #e9f2ff;
+    transition: background-color 0.3s ease;
+}
+
+.loading,
+.error,
+.no-users {
+    text-align: center;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.loading {
+    color: #0d6efd;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.no-users {
+    color: #6c757d;
+}

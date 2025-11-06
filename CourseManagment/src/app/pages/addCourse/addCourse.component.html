@@ -1,0 +1,99 @@
+<div class="form-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ editItem ? 'Edit Course' : 'Add Course' }}</h2>
+
+            <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name">
+                        Course Name <small class="text-danger">*</small>
+                    </label>
+                    <input type="text" id="name" class="form-control" formControlName="name"
+                        placeholder="Enter Course Name" [class.is-invalid]="name?.invalid && name?.touched" />
+                    @if (name?.invalid && name?.touched) {
+                    <div class="invalid-feedback">
+                        @if (name?.errors?.['required']) {
+                        <span>Course name is required</span>
+                        }
+                        @if (name?.errors?.['minlength']) {
+                        <span>Course name must be at least 3 characters</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Duration in Months Field -->
+                <div class="form-group">
+                    <label for="durationInMonths">
+                        Duration of Course (in months) <small class="text-danger">*</small>
+                    </label>
+                    <input type="number" id="durationInMonths" class="form-control" formControlName="durationInMonths"
+                        placeholder="Enter duration in months"
+                        [class.is-invalid]="durationInMonths?.invalid && durationInMonths?.touched" />
+                    @if (durationInMonths?.invalid && durationInMonths?.touched) {
+                    <div class="invalid-feedback">
+                        @if (durationInMonths?.errors?.['required']) {
+                        <span>Duration is required</span>
+                        }
+                        @if (durationInMonths?.errors?.['min']) {
+                        <span>Duration must be at least 1 month</span>
+                        }
+                        @if (durationInMonths?.errors?.['max']) {
+                        <span>Duration cannot exceed 60 months</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Start Date Field -->
+                <div class="form-group">
+                    <label for="startDate">
+                        Start Date <small class="text-danger">*</small>
+                    </label>
+                    <input type="date" id="startDate" class="form-control" formControlName="startDate"
+                        [class.is-invalid]="startDate?.invalid && startDate?.touched" />
+                    @if (startDate?.invalid && startDate?.touched) {
+                    <div class="invalid-feedback">
+                        @if (startDate?.errors?.['required']) {
+                        <span>Start date is required</span>
+                        }
+                        @if (startDate?.errors?.['pastDate']) {
+                        <span>Start date cannot be in the past</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Minimum Required Age Field -->
+                <div class="form-group">
+                    <label for="minimumRequiredAge">
+                        Minimum Age Limit <small class="text-danger">*</small>
+                    </label>
+                    <input type="number" id="minimumRequiredAge" class="form-control"
+                        formControlName="minimumRequiredAge" placeholder="Enter minimum age limit"
+                        [class.is-invalid]="minimumRequiredAge?.invalid && minimumRequiredAge?.touched" />
+                    @if (minimumRequiredAge?.invalid && minimumRequiredAge?.touched) {
+                    <div class="invalid-feedback">
+                        @if (minimumRequiredAge?.errors?.['required']) {
+                        <span>Minimum age is required</span>
+                        }
+                        @if (minimumRequiredAge?.errors?.['min']) {
+                        <span>Minimum age must be at least 5</span>
+                        }
+                        @if (minimumRequiredAge?.errors?.['max']) {
+                        <span>Minimum age cannot exceed 100</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit" [class.btn-update]="editItem" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'Processing...' : (editItem ? 'Update' : 'Add') }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

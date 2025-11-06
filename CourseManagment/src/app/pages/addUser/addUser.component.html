@@ -1,0 +1,175 @@
+<div class="form-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ editUser ? 'Edit User' : 'Add User' }}</h2>
+
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name">
+                        Name <small class="text-danger">*</small>
+                    </label>
+                    <input type="text" id="name" class="form-control" formControlName="name"
+                        placeholder="Enter your Name" [class.is-invalid]="name?.invalid && name?.touched" />
+                    @if (name?.invalid && name?.touched) {
+                    <div class="invalid-feedback">
+                        @if (name?.errors?.['required']) {
+                        <span>Name is required</span>
+                        }
+                        @if (name?.errors?.['minlength']) {
+                        <span>Name must be at least 2 characters</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">
+                        Email <small class="text-danger">*</small>
+                    </label>
+                    <input type="email" id="email" class="form-control" formControlName="email"
+                        placeholder="Enter your Email" [class.is-invalid]="email?.invalid && email?.touched" />
+                    @if (email?.invalid && email?.touched) {
+                    <div class="invalid-feedback">
+                        @if (email?.errors?.['required']) {
+                        <span>Email is required</span>
+                        }
+                        @if (email?.errors?.['email']) {
+                        <span>Please enter a valid email</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Date of Birth Field -->
+                <div class="form-group">
+                    <label for="dateOfBirth">
+                        DOB <small class="text-danger">*</small>
+                    </label>
+                    <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth"
+                        [class.is-invalid]="dateOfBirth?.invalid && dateOfBirth?.touched" />
+                    @if (dateOfBirth?.invalid && dateOfBirth?.touched) {
+                    <div class="invalid-feedback">
+                        @if (dateOfBirth?.errors?.['required']) {
+                        <span>Date of Birth is required</span>
+                        }
+                        @if (dateOfBirth?.errors?.['futureDate']) {
+                        <span>Date of Birth cannot be in the future</span>
+                        }
+                        @if (dateOfBirth?.errors?.['minimumAge']) {
+                        <span>You must be at least {{ dateOfBirth?.errors?.['minimumAge'].requiredAge }} years
+                            old</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Phone Number Field -->
+                <div class="form-group">
+                    <label for="phoneNumber">
+                        Phone Number <small class="text-danger">*</small>
+                    </label>
+                    <input type="tel" id="phoneNumber" class="form-control" formControlName="phoneNumber"
+                        placeholder="Enter your Phone Number"
+                        [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched" />
+                    @if (phoneNumber?.invalid && phoneNumber?.touched) {
+                    <div class="invalid-feedback">
+                        @if (phoneNumber?.errors?.['required']) {
+                        <span>Phone Number is required</span>
+                        }
+                        @if (phoneNumber?.errors?.['pattern']) {
+                        <span>Phone Number must be 10 digits</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">
+                        Password <small class="text-danger">*</small>
+                    </label>
+                    <input type="password" id="password" class="form-control" formControlName="password"
+                        placeholder="Enter the Password" [class.is-invalid]="password?.invalid && password?.touched" />
+                    @if (password?.invalid && password?.touched) {
+                    <div class="invalid-feedback">
+                        @if (password?.errors?.['required']) {
+                        <span>Password is required</span>
+                        }
+                        @if (password?.errors?.['minlength']) {
+                        <span>Password must be at least 8 characters</span>
+                        }
+                        @if (password?.errors?.['maxlength']) {
+                        <span>Password must be less than 200 characters</span>
+                        }
+                        @if (password?.errors?.['pattern']) {
+                        <span>Password must include uppercase, lowercase, number, and special character (@$!%*?&)</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Status Radio Buttons -->
+                <div class="form-group">
+                    <label>
+                        Status <small class="text-danger">*</small>
+                    </label>
+                    <div class="radio-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="statusActive" [value]="true"
+                                formControlName="isActive" />
+                            <label class="form-check-label" for="statusActive">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="statusInactive" [value]="false"
+                                formControlName="isActive" />
+                            <label class="form-check-label" for="statusInactive">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                    @if (isActive?.invalid && isActive?.touched) {
+                    <div class="invalid-feedback d-block">
+                        @if (isActive?.errors?.['required']) {
+                        <span>Status is required</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Admin Select Dropdown -->
+                <div class="form-group">
+                    <label for="isAdmin">
+                        Role <small class="text-danger">*</small>
+                    </label>
+                    <select id="isAdmin" class="form-control form-select" formControlName="isAdmin"
+                        [class.is-invalid]="isAdmin?.invalid && isAdmin?.touched">
+                        <option value="">-- Select a Role --</option>
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
+                    </select>
+                    @if (isAdmin?.invalid && isAdmin?.touched) {
+                    <div class="invalid-feedback">
+                        @if (isAdmin?.errors?.['required']) {
+                        <span>Role is required</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit" [class.btn-update]="editUser" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'Processing...' : (editUser ? 'Update' : 'Add') }}
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm mt-2" [disabled]="isSubmitting"
+                    (click)="onCancel()">
+                    Reset
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

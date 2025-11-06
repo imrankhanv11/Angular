@@ -1,0 +1,38 @@
+<div class="course-list-container">
+    <h2 class="table-title">Course List</h2>
+
+    @if (loading$ | async) {
+    <div class="loading">Loading courses...</div>
+    }
+    @else if (error$ | async; as error) {
+    <div class="error">{{ error }}</div>
+    }
+    @else {
+    <table class="course-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Course Name</th>
+                <th>Duration Month</th>
+                <th>Started Date</th>
+                <th>Minimum Age Required</th>
+                <th>Created On</th>
+                <th>Enrollment Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (course of courses$ | async; track course.id; let i = $index) {
+            <tr app-courseadmin-row [course]="course" [index]="i"></tr>
+            }
+            @empty {
+            <tr>
+                <td colspan="8" class="no-courses text-danger text-center">
+                    No courses found
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>

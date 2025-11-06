@@ -1,0 +1,45 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 0.3em;
+}
+
+.error-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: red;
+  max-width: 380px;
+  margin-bottom: 2em;
+}
+
+.home-link {
+  text-decoration: none;
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.home-link:hover {
+  background-color: #555555;
+}

@@ -1,0 +1,13 @@
+.hero {
+    height: 45vh;
+    background: linear-gradient(135deg, rgba(14, 164, 202, 0.85), rgba(26, 10, 247, 0.75));
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}

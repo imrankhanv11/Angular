@@ -1,0 +1,65 @@
+<div class="form-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Login</h2>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">
+                        Email <small class="text-danger">*</small>
+                    </label>
+                    <input type="email" id="email" class="form-control" formControlName="email"
+                        placeholder="Enter your email"
+                        [class.is-invalid]="(f['email'].touched || submitted) && f['email'].invalid" />
+                    @if ((f['email'].touched || submitted) && f['email'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['email'].errors?.['required']) {
+                        <span>Email is required</span>
+                        }
+                        @if (f['email'].errors?.['email']) {
+                        <span>Please enter a valid email</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">
+                        Password <small class="text-danger">*</small>
+                    </label>
+                    <input type="password" id="password" class="form-control" formControlName="password"
+                        placeholder="Enter your password"
+                        [class.is-invalid]="(f['password'].touched || submitted) && f['password'].invalid" />
+                    @if ((f['password'].touched || submitted) && f['password'].invalid) {
+                    <div class="invalid-feedback">
+                        @if (f['password'].errors?.['required']) {
+                        <span>Password is required</span>
+                        }
+                        @if (f['password'].errors?.['minlength']) {
+                        <span>Password must be at least 8 characters</span>
+                        }
+                        @if (f['password'].errors?.['pattern']) {
+                        <span>Must include uppercase, lowercase, number, and special character</span>
+                        }
+                        @if (f['password'].errors?.['maxlength']) {
+                        <span>Password must be less than 200 characters</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit">
+                    Login
+                </button>
+            </form>
+            <div class="d-flex justify-content-center mt-1 small">
+                <p>If you don't have account please? <span class="text-info" style="cursor: pointer;"
+                        (click)="onRegister()">Register</span></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<td>{{ index + 1 }}</td>
+<td>{{ course.name }}</td>
+<td>{{ course.durationInMonths }} months</td>
+<td>{{ course.startDate | date: 'mediumDate' }}</td>
+<td>{{ course.minimumRequiredAge }}</td>
+<td>{{ course.createdOn | date: 'mediumDate' }}</td>
+<td>{{ course.enrolledUsersCount }}</td>
+<td class="d-flex justify-content-around align-items-center m-auto">
+    <button class="btn btn-info btn-sm" (click)="onEdit()">Edit</button>
+    <button class="btn btn-danger btn-sm" (click)="onDelete()">Delete</button>
+</td>
