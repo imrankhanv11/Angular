@@ -3,83 +3,85 @@
     <table class="table table-striped table-hover align-middle text-center mb-0">
       <thead class="table-info">
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">S.No.</th>
           <th scope="col">Candidate ID</th>
           <th scope="col">Candidate Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Next Interview Type</th>
+          <th scope="col">Next Interview</th>
           <th scope="col">Resume</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
         @for (item of pendingEmployee(); track item.id; let i = $index) {
-        <tr
-          app-interview-assign-row
-          [interview]="item"
-          [index]="i"
-          (assign)="openAssignModal($event)"
-        ></tr>
+        <tr app-interview-assign-row [interview]="item" [index]="i" (assign)="openAssignModal($event)"></tr>
+        }
+        @empty {
+        <tr>
+          <td colspan="7">
+            No Pending Data
+          </td>
+        </tr>
         }
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- Angular-based Modal -->
+<!-- Modal -->
 <div class="modal-backdrop fade show" *ngIf="showModal"></div>
 
 <div class="modal d-block" tabindex="-1" *ngIf="showModal">
-    <div class="modal-dialog">
-        <div class="modal-content shadow">
-            <div class="modal-header">
-                <h5 class="modal-title">Assign Interview</h5>
-                <button type="button" class="btn-close" (click)="closeModal()"></button>
+  <div class="modal-dialog">
+    <div class="modal-content shadow">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Interview</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="assignForm">
+          <div class="mb-3">
+            <label class="form-label">Date of Interview</label>
+            <input type="date" class="form-control" formControlName="dateOfInterview" id="dateOfInterview"
+              [class.is-invalid]="dateOfInterview?.invalid && dateOfInterview?.touched" />
+            @if (dateOfInterview?.invalid && dateOfInterview?.touched) {
+            <div class="invalid-feedback">
+              @if (dateOfInterview?.errors?.['required']) {
+              <span>Start date is required</span>
+              }
+              @if (dateOfInterview?.errors?.['pastDate']) {
+              <span>Start date cannot be in the past</span>
+              }
             </div>
+            }
+          </div>
 
-            <div class="modal-body">
-                <form [formGroup]="assignForm">
-                    <div class="mb-3">
-                        <label class="form-label">Date of Interview</label>
-                        <input type="date" class="form-control" formControlName="dateOfInterview" id="dateOfInterview"
-                            [class.is-invalid]="dateOfInterview?.invalid && dateOfInterview?.touched" />
-                        @if (dateOfInterview?.invalid && dateOfInterview?.touched) {
-                        <div class="invalid-feedback">
-                            @if (dateOfInterview?.errors?.['required']) {
-                            <span>Start date is required</span>
-                            }
-                            @if (dateOfInterview?.errors?.['pastDate']) {
-                            <span>Start date cannot be in the past</span>
-                            }
-                        </div>
-                        }
-                    </div>
+          <div class="mb-3">
+            <label class="form-label">Select Interviewer</label>
+            <select class="form-select" formControlName="interviewerId"
+              [class.is-invalid]="interviewerId?.invalid && interviewerId?.touched">
+              <option value="">-- Select --</option>
+              @for (emp of employees; track emp.id ?? $index) {
+              <option [value]="emp.id">{{ emp.name }}</option>
+              }
+            </select>
 
-                    <div class="mb-3">
-                        <label class="form-label">Select Interviewer</label>
-                        <select class="form-select" formControlName="interviewerId"
-                            [class.is-invalid]="interviewerId?.invalid && interviewerId?.touched">
-                            <option value="">-- Select --</option>
-                            @for (emp of employees; track emp.id ?? $index) {
-                            <option [value]="emp.id">{{ emp.name }}</option>
-                            }
-                        </select>
-
-                        @if (interviewerId?.invalid && interviewerId?.touched) {
-                        <div class="invalid-feedback">
-                            @if (interviewerId?.errors?.['required']) {
-                            <span>Interviewer is required</span>
-                            }
-                        </div>
-                        }
-                    </div>
-                </form>
+            @if (interviewerId?.invalid && interviewerId?.touched) {
+            <div class="invalid-feedback">
+              @if (interviewerId?.errors?.['required']) {
+              <span>Interviewer is required</span>
+              }
             </div>
+            }
+          </div>
+        </form>
+      </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-secondary" (click)="closeModal()">Close</button>
-                <button class="btn btn-primary" (click)="submitAssign()">Submit</button>
-            </div>
-        </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button class="btn btn-primary" (click)="submitAssign()">Submit</button>
+      </div>
     </div>
+  </div>
 </div>

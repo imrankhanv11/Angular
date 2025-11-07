@@ -22,8 +22,9 @@ export class InterviewAssessmentComponent implements OnInit {
     interviewTypeId!: number;
     assessmentForm!: FormGroup;
 
-    // Rating options
+    // Rating 
     ratingOptions = [1, 2, 3, 4, 5];
+
     ratingLabels = [
         'Below Satisfactory',
         'Satisfactory',
@@ -36,7 +37,7 @@ export class InterviewAssessmentComponent implements OnInit {
         this.interviewId = Number(this.route.snapshot.paramMap.get('id'));
         this.candidateId = Number(this.route.snapshot.paramMap.get('candidateId'));
         this.interviewTypeId = Number(this.route.snapshot.paramMap.get('interviewTypeId'));
-        console.log(this.interviewId, this.candidateId, this.interviewTypeId);
+        
         this.initForm();
     }
 
@@ -74,7 +75,7 @@ export class InterviewAssessmentComponent implements OnInit {
         });
     }
 
-    // Calculate overall technical rating
+    //  overall technical rating
     get technicalOverall(): number {
         const techSkills = this.assessmentForm?.get('technicalSkills')?.value;
         if (!techSkills) return 0;
@@ -87,7 +88,7 @@ export class InterviewAssessmentComponent implements OnInit {
         return values.length > 0 ? Math.round(values.reduce((a, b) => a + b, 0)) : 0;
     }
 
-    // Calculate overall soft skills rating
+    // overall soft skills rating
     get softSkillsOverall(): number {
         const softSkills = this.assessmentForm?.get('softSkills')?.value;
         if (!softSkills) return 0;

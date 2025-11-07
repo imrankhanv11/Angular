@@ -16,6 +16,13 @@
                 @for (item of hrPending; track item.id; let i = $index) {
                 <tr app-CandidatePending-row [interview]="item" [index]="i"></tr>
                 }
+                @empty {
+                <tr>
+                    <td colspan="7">
+                        No Pending Data
+                    </td>
+                </tr>
+                }
             </tbody>
         </table>
     </div>

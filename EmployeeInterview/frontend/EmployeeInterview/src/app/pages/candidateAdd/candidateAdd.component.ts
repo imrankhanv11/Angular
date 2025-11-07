@@ -63,7 +63,6 @@ export class CandidateAddComponenet implements OnInit {
             this.candidateForm.get('noticePeriod')?.disable();
 
         } else {
-            // If unchecked → clear and enable fields again
             this.candidateForm.get('currentEmployer')?.enable();
             this.candidateForm.get('currentDesignation')?.enable();
             this.candidateForm.get('TotalExperience')?.enable();

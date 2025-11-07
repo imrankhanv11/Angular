@@ -15,6 +15,9 @@
                 @for (item of SelectedCandidates; track item.id; let i = $index) {
                 <tr app-candidate-selected-row [interview]="item" [index]="i"></tr>
                 }
+                @empty {
+                    <tr>No Selected Candidate</tr>
+                }
             </tbody>
         </table>
     </div>

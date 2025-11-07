@@ -1,7 +1,8 @@
 .navbar {
     transition: all 0.3s ease-in-out;
     padding: 0.8rem 1rem;
-    background-color: #1976d2 !important; /* Blue tone */
+    background-color: #1976d2 !important;
+    /* Blue tone */
 }
 
 .navbar.scrolled {
@@ -18,7 +19,8 @@
 }
 
 .navbar-brand span {
-    color: white !important; /* golden accent */
+    color: white !important;
+    /* golden accent */
 }
 
 .nav-link {
@@ -29,14 +31,14 @@
     transition: color 0.3s ease;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     text-decoration: underline black;
     text-underline-offset: 4px;
     transition: linear 8ms;
 }
 
 .nav-link.active {
-    color: black !important;
+    color: lightblue !important;
 }
 
 .navbar-toggler {
