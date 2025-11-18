@@ -1,0 +1,63 @@
+<div class="course-list-container">
+    <h2 class="table-title">Available Courses</h2>
+
+    @if (loading$ | async) {
+    <div class="loading">Loading courses...</div>
+    }
+    @else if (error$ | async; as error) {
+    <div class="error">{{ error }}</div>
+    }
+    @else {
+
+    <div class="card-grid">
+        @for (course of courses$ | async; track course.id; let i = $index) {
+
+        <div class="course-card">
+
+            <!-- Badge -->
+            <span class="badge">
+                <i class="fa-solid fa-star"></i> Popular
+            </span>
+
+            <!-- Course Title -->
+            <h3 class="course-title">
+                <i class="fa-solid fa-book"></i>
+                {{ course.name }}
+            </h3>
+
+            <!-- Details -->
+            <div class="course-detail">
+                <i class="fa-solid fa-clock"></i>
+                <strong>Duration:</strong> {{ course.durationInMonths }} months
+            </div>
+
+            <div class="course-detail">
+                <i class="fa-solid fa-calendar-days"></i>
+                <strong>Start Date:</strong> {{ course.startDate | date }}
+            </div>
+
+            <div class="course-detail">
+                <i class="fa-solid fa-users"></i>
+                <strong>Enrollments:</strong> {{ course.enrolledUsersCount }}
+            </div>
+
+            <div class="course-detail">
+                <i class="fa-solid fa-user"></i>
+                <strong>Min Age:</strong> {{ course.minimumRequiredAge }}
+            </div>
+
+            <!-- Button -->
+            <button class="enroll-btn">
+                <i class="fa-solid fa-circle-check"></i>
+                Enroll Now
+            </button>
+        </div>
+
+        }
+
+        @empty {
+        <div class="no-courses text-danger text-center">No courses found</div>
+        }
+    </div>
+    }
+</div>

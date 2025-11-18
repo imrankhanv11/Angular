@@ -6,6 +6,7 @@ import { HeroComponent } from "../../common/components/hero/hero.component";
     selector: "app-home",
     imports: [CommonModule, HeroComponent],
     standalone: true,
-    templateUrl: "home.Component.html"
+    templateUrl: "home.Component.html",
+    styleUrl: "home.component.css"
 })
 export class HomeComponent {}

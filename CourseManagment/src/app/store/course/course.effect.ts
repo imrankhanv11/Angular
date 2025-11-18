@@ -52,5 +52,17 @@ export class CourseEffects {
         )
     );
 
-    
+    updateCourse$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CourseAction.UpdateCourse),
+            mergeMap(({ course }) =>
+                this.courseService.UpdateCourse(course).pipe(
+                    map((updatedUser) => CourseAction.UpdateCourseSuccess({ course: updatedUser })),
+                    catchError((error) =>
+                        of(CourseAction.updateCourseFailed({ error: error?.error?.message || 'Update failed' }))
+                    )
+                )
+            )
+        )
+    );
 }

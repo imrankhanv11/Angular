@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractContro
 import { CourseAdd } from '../../common/types/courseAdd';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { addCourse } from '../../store/course/course.actions';
-import { selectAddCourseFailed, selectAddCourseSuccess, selectCouseToEdit } from '../../store/course/course.selector';
+import { addCourse, clearSelectedCouse, UpdateCourse } from '../../store/course/course.actions';
+import { selectAddCourseFailed, selectAddCourseSuccess, selectCouseToEdit, selectUpdateCourseError, selectUpdateCourseSuccess } from '../../store/course/course.selector';
 import { showErrorToast, showSuccessToast } from '../../utils/toast.util';
 import { CourseUpdate } from '../../common/types/courseUpdate';
 
@@ -119,7 +119,24 @@ export class CourseAddFormComponent implements OnInit {
                 startDate: formData.startDate,
                 minimumRequiredAge: formData.minimumRequiredAge
             };
-            console.log('Update Course:', updateData);
+
+            this.store.dispatch(UpdateCourse({ course: updateData }));
+
+            this.store.select(selectUpdateCourseSuccess).subscribe((success) => {
+                if (success) {
+                    showSuccessToast('Couse Update successfully!');
+                    this.store.dispatch(clearSelectedCouse());
+                    this.router.navigate(['/courselistadmin']);
+                }
+
+                this.store.select(selectUpdateCourseError).subscribe(error => {
+                    if (error) {
+                        this.isSubmitting = false;
+                        showErrorToast(error);
+                    }
+                });
+            })
+
         } else {
             const courseData: CourseAdd = {
                 name: formData.name,
@@ -129,7 +146,6 @@ export class CourseAddFormComponent implements OnInit {
             };
 
             this.store.dispatch(addCourse({ course: courseData }));
-
 
             this.store.select(selectAddCourseSuccess).subscribe((sucess) => {
                 if (sucess) {

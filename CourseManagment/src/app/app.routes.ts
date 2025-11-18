@@ -12,6 +12,8 @@ import { UserListComponent } from './pages/userList/userList.component';
 import { CourseAddFormComponent } from './pages/addCourse/addCourse.component';
 import { CourseListAdminComponent } from './pages/courseListAdmin/courseListAdmin.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { CourseuserComponent } from './pages/courseuser/courseuser.component';
+import { userGuard } from './guard/userGuard';
 
 export const routes: Routes = [
     // Public Pages
@@ -25,6 +27,9 @@ export const routes: Routes = [
     { path: 'userlist', component: UserListComponent, canActivate: [adminGuard] },
     { path: "addcourse", component: CourseAddFormComponent, canActivate: [adminGuard] },
     { path: "courselistadmin", component: CourseListAdminComponent, canActivate: [adminGuard] },
+
+    // User Pages
+    { path: "couselistuser", component: CourseuserComponent, canActivate: [userGuard] },
 
     // Helper pages
     { path: "unauthorized", component: UnauthorizedComponent },

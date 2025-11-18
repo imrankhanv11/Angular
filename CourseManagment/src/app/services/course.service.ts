@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { privateEnpoints } from '../api/endPoints';
 import { courseList } from '../common/types/courseList';
 import { CourseAdd } from '../common/types/courseAdd';
+import { CourseUpdate } from '../common/types/courseUpdate';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService {
@@ -21,5 +22,9 @@ export class CourseService {
 
     deletCourse(id: number): Observable<any> {
         return this.http.delete<any>(`${this.baseUrl}${privateEnpoints.DeleteCourse(id)}`);
+    }
+
+    UpdateCourse(data: CourseUpdate): Observable<courseList> {
+        return this.http.put<courseList>(`${this.baseUrl}${privateEnpoints.UpdateCourse}`, data);
     }
 }

@@ -46,3 +46,14 @@ export const selectCouseToEdit = createSelector(
     selectCourseState,
     (state) => state.SelectedCourse
 );
+
+// update
+export const selectUpdateCourseSuccess = createSelector(
+    selectCourseState,
+    (state) => state.updateCourseSuccess
+);
+
+export const selectUpdateCourseError = createSelector(
+    selectCourseState,
+    (state) => state.updateCourseError
+);

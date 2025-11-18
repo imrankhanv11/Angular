@@ -11,7 +11,11 @@ import {
     deleteCourse,
     selectCourseForEdit,
     clearSelectedCouse,
+    UpdateCourse,
+    UpdateCourseSuccess,
+    updateCourseFailed,
 } from './course.actions';
+import { updateUserSuccess } from '../user/user.action';
 
 export interface CourseState {
     // get
@@ -27,6 +31,10 @@ export interface CourseState {
     deleteCourseSuccess: boolean;
     deleteCourseError: string | null;
 
+
+    updateCourseSuccess: boolean,
+    updateCourseError: null,
+
     // edit
     SelectedCourse: courseList | null;
 }
@@ -40,6 +48,8 @@ export const initialState: CourseState = {
     deleteCourseError: null,
     deleteCourseSuccess: false,
     SelectedCourse: null,
+    updateCourseError: null,
+    updateCourseSuccess: false
 };
 
 export const courseReducer = createReducer(
@@ -111,5 +121,34 @@ export const courseReducer = createReducer(
     on(clearSelectedCouse, (state) => ({
         ...state,
         selectedUser: null
-    }))
+    })),
+
+    // update
+    on(UpdateCourse, (state) => ({
+        ...state,
+        loading: true,
+        updateCourseError: null
+    })),
+
+    on(UpdateCourseSuccess, (state, { course }) => ({
+        ...state,
+        users: state.courses.map((u) =>
+            u.id === course.id
+                ? {
+                    ...u,
+                    ...course,
+                } as courseList
+                : u
+        ),
+        couse: true,
+        loading: false,
+        updateCourseSuccess: true,
+    })),
+
+    on(updateCourseFailed, (state, { error }) => ({
+        ...state,
+        loading: false,
+        updateCourseError: error,
+        updateCourseSuccess: false
+    })),
 );

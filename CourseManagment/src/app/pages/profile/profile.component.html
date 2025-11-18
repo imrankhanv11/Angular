@@ -1,3 +1,30 @@
-<div>
-    <button (click)="onLogout()" class="btn btn-danger">Logout</button>
+<div class="profile-container">
+
+    <div class="profile-card">
+        <img src="logo.webp" alt="Profile" class="profile-img">
+        <h2 class="profile-name">Welcome, User</h2>
+        <p class="profile-role">Member of Online Learning Portal</p>
+
+        <button (click)="onLogout()" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+
+        <hr>
+
+        <h3 class="section-title">About This Website</h3>
+        <p class="section-text">
+            This portal helps students explore various courses, learn new skills,
+            and keep track of their learning progress. Designed with simplicity,
+            speed, and a great learning experience in mind.
+        </p>
+
+        <h3 class="section-title">Your Account</h3>
+        <ul class="info-list">
+            <li><i class="fa-solid fa-envelope"></i> Email: user@example.com</li>
+            <li><i class="fa-solid fa-user-check"></i> Account Status: Active</li>
+            <li><i class="fa-solid fa-clock"></i> Member Since: 2024</li>
+        </ul>
+
+    </div>
+
 </div>

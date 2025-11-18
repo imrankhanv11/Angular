@@ -19,14 +19,16 @@
                         Home
                     </a>
                 </li>
-
                 <!-- Authenticated user -->
                 @if (isAuthenticated$ | async) {
+                    
+                @if ((role$ | async) === 'User') {
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/courselistadmin" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/couselistuser" routerLinkActive="active">
                         Courses
                     </a>
                 </li>
+                }
 
                 @if ((role$ | async) === 'Admin') {
                 <li class="nav-item">

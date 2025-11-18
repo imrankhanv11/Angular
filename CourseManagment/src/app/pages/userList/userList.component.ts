@@ -31,11 +31,9 @@ export class UserListComponent implements OnInit {
 
         this.users$
             .pipe(
-                take(1), 
+                take(1),
                 tap(users => {
-                    if (!users || users.length === 0) {
-                        this.store.dispatch(loadUsers());
-                    }
+                    this.store.dispatch(loadUsers());
                 })
             )
             .subscribe();

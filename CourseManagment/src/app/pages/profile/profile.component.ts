@@ -8,7 +8,8 @@ import { logout } from "../../store/authentication/auth.actions";
     selector: 'app-profile',
     imports: [CommonModule],
     standalone: true,
-    templateUrl: "./profile.Component.html"
+    templateUrl: "./profile.Component.html",
+    styleUrl: "./profile.component.css"
 })
 export class ProfileComponent {
 

@@ -33,10 +33,8 @@ export class CourseListAdminComponent implements OnInit {
         this.courses$
             .pipe(
                 take(1),
-                tap((courses) => {
-                    if (!courses || courses.length === 0) {
-                        this.store.dispatch(loadCourses());
-                    }
+                tap(() => {
+                    this.store.dispatch(loadCourses());
                 })
             )
             .subscribe();
